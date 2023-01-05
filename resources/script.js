@@ -17,6 +17,7 @@ function handleSearchFormSubmit(event) {
       "&units=imperial&appid=" +
       apiKey;
     console.log(apiUrl);
+    searchInputEl.value = "";
   } else {
     window.alert("You must input a city name to get a weather report.");
   }
