@@ -50,14 +50,14 @@ label {
   width: 100%;
 }
 
-input[type="search"] {
+input[type="text"] {
   font-size: 18px;
   margin: 0.5rem 0 0.5rem 0;
   padding: 0.25rem;
   width: 100%;
 }
 
-input[type="submit"] {
+button[type="submit"] {
   background-color: hsl(203, 89%, 53%);
   border: none;
   color: hsl(0, 0%, 100%);
@@ -67,7 +67,7 @@ input[type="submit"] {
   width: 100%;
 }
 
-input[type="submit"]:hover {
+button[type="submit"]:hover {
   background-color: hsl(203, 92%, 67%);
 }
 
