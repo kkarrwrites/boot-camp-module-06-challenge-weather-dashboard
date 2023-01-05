@@ -1,2 +1,1 @@
-# boot-camp-module-06-challenge-weather-dashboard
- 
+# Boot Camp - Module 6 Challenge - Server-Side APIs Challenge: Weather Dashboard
