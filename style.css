@@ -1,0 +1,129 @@
+/* Resets */
+html {
+  font-size: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 1rem;
+}
+
+header {
+  background: linear-gradient(
+    to right,
+    hsl(240, 100%, 50%),
+    hsl(240, 100%, 27%)
+  );
+  color: hsl(0, 0%, 100%);
+  font-size: 24px;
+  padding: 1rem 0 1rem 0;
+  text-align: center;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+}
+
+aside {
+  margin: 1rem;
+  width: 25%;
+}
+
+section {
+  margin: 1rem;
+  width: 75%;
+}
+
+label {
+  font-size: 24px;
+  font-weight: bolder;
+  width: 100%;
+}
+
+input[type="search"] {
+  font-size: 18px;
+  margin: 0.5rem 0 0.5rem 0;
+  padding: 0.25rem;
+  width: 100%;
+}
+
+input[type="submit"] {
+  background-color: hsl(203, 89%, 53%);
+  border: none;
+  color: hsl(0, 0%, 100%);
+  font-size: 18px;
+  margin: 0 0 0.5rem 0;
+  padding: 0.5rem 0 0.5rem 0;
+  width: 100%;
+}
+
+input[type="submit"]:hover {
+  background-color: hsl(203, 92%, 67%);
+}
+
+hr {
+  margin: 0 0 0.5rem 0;
+}
+
+.city-list p {
+  background-color: hsl(0, 0%, 61%);
+  color: hsl(0, 0%, 0%);
+  font-size: 18px;
+  margin: 0 0 0.5rem 0;
+  padding: 0.5rem 0 0.5rem 0;
+  text-align: center;
+  width: 100%;
+}
+
+.city-list p:hover {
+  background-color: hsl(0, 0%, 80%);
+}
+
+.city {
+  border: 1.5px solid hsl(0, 0%, 0%);
+  margin: 0 0 1rem 0;
+  width: 90%;
+}
+
+.city p,
+.city h2 {
+  margin: 0.25rem 0 1rem 0.25rem;
+}
+
+.forecast {
+  width: 90%;
+}
+
+.forecast h3 {
+  margin: 0 0 1rem 0;
+}
+
+.cards {
+  display: flex;
+  flex-direction: row;
+}
+
+.card {
+  background-color: hsl(243, 28%, 13%);
+  color: hsl(0, 0%, 100%);
+  width: 20%;
+}
+
+.card:not(:last-child) {
+  margin: 0 1rem 0 0;
+}
+
+.card h4,
+.card p {
+  margin: 0.25rem 0 1rem 0.25rem;
+}
