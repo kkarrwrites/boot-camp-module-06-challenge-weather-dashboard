@@ -7,6 +7,11 @@
     <title>Weather Dashboard</title>
     <!-- CSS Stylesheet -->
     <link rel="stylesheet" href="resources/style.css" />
+    <!-- Day.js -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"
+    ></script>
     <!-- JavaScript -->
     <script defer src="/resources/script.js"></script>
   </head>
@@ -22,24 +27,24 @@
           <button type="submit">Search</button>
         </form>
         <hr />
-        <div class="city-list">
-          <p>Denver</p>
-          <p>Hartford</p>
-        </div>
+        <div class="city-list"></div>
       </aside>
       <section>
-        <div class="city">
-          <h2>City (Date) <span>☀️</span></h2>
-          <p>Temp: <span></span></p>
-          <p>Wind: <span></span></p>
-          <p>Humidity: <span></span></p>
+        <div class="city hidden">
+          <h2>
+            <span id="city-name"></span> <span id="city-date"></span>
+            <span id="city-emoji"></span>
+          </h2>
+          <p>Temp: <span id="temp-current"></span></p>
+          <p>Wind: <span id="wind-current"></span></p>
+          <p>Humidity: <span id="humidity-current"></span></p>
         </div>
         <div class="forecast">
           <h3>5-Day Forecast:</h3>
           <div class="cards">
             <div class="card">
               <h4>Date</h4>
-              <p><span>☀️</span></p>
+              <p><span></span></p>
               <p>Temp: <span></span></p>
               <p>Wind: <span></span></p>
               <p>Humidity: <span></span></p>
