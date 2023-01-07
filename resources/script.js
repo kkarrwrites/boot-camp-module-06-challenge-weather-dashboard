@@ -12,26 +12,38 @@ const currentTemp = document.querySelector("#temp-current");
 const currentWind = document.querySelector("#wind-current");
 const currentHumidity = document.querySelector("#humidity-current");
 
-const forecastContainerEl = document.querySelector("#forecast");
+const forecastContainerEl = document.querySelector(".forecast");
+const cardsContainerEl = document.querySelector(".cards");
 
 function handleSearchFormSubmit(event) {
   event.preventDefault();
 
   const citySearched = searchInputEl.value.trim();
+  const apiKey = "f4340e47ea2c893cd45e033c791f26e0";
 
   if (citySearched) {
-    const apiKey = "f4340e47ea2c893cd45e033c791f26e0";
-    const apiUrl =
+    const apiWeatherUrl =
+      "https://api.openweathermap.org/data/2.5/weather?q=" +
+      citySearched +
+      "&units=imperial&appid=" +
+      apiKey;
+    fetch(apiWeatherUrl).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (data) {
+          displayWeather(data);
+        });
+      }
+    });
+
+    const apiForecastUrl =
       "http://api.openweathermap.org/data/2.5/forecast?q=" +
       citySearched +
       "&units=imperial&appid=" +
       apiKey;
-    // console.log(apiUrl);
-
-    fetch(apiUrl).then(function (response) {
+    fetch(apiForecastUrl).then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
-          displayWeather(data);
+          displayForecast(data);
         });
       }
     });
@@ -49,14 +61,17 @@ function displayWeather(data) {
   cityContainerEl.classList.remove("hidden");
 
   // Display city name
-  cityNameEl.textContent = data.city.name;
+  cityNameEl.textContent = data.name;
 
   // Display the date
-  const date = data.list[0].dt_txt;
-  cityDateEl.textContent = dayjs(date).format("M/D/YYYY");
+  function displayDate() {
+    const currentDate = dayjs().format("M/D/YYYY");
+    cityDateEl.textContent = currentDate;
+  }
+  displayDate();
 
   // Display an icon representation of weather conditions
-  const emoji = data.list[0].weather[0].main;
+  const emoji = data.weather[0].main;
 
   if (emoji === "Atmosphere") {
     cityEmojiEl.textContent === "🌫️";
@@ -77,15 +92,34 @@ function displayWeather(data) {
   }
 
   // Display the temperature
-  currentTemp.textContent = data.list[0].main.temp + " °F";
+  currentTemp.textContent = data.main.temp + " °F";
 
   // Display the the wind speed
-  currentWind.textContent = data.list[0].wind.speed + " MPH";
+  currentWind.textContent = data.wind.speed + " MPH";
 
   // Display the humidity
-  currentHumidity.textContent = data.list[0].main.humidity + " %";
+  currentHumidity.textContent = data.main.humidity + " %";
+}
 
+function displayForecast(data) {
   // When I view future weather conditions for that city, then I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
+
+  // Display future weather conditions for that city container
+  forecastContainerEl.classList.remove("hidden");
+
+  // Display 5-day forecast
+  const forecastArray = data.list;
+  for (let i = 0; i < forecastArray.length; i += 8) {
+    // console.log(forecastArray[i]);
+    const forecastCard = document.createElement("div");
+    forecastCard.classList = "card";
+    forecastCard.innerHTML = `<h4>Date</h4>
+      <p><span>☀️</span></p>
+      <p>Temp: <span></span></p>
+      <p>Wind: <span></span></p>
+      <p>Humidity: <span></span></p>`;
+    cardsContainerEl.appendChild(forecastCard);
+  }
 }
 
 searchFormEl.addEventListener("submit", handleSearchFormSubmit);
