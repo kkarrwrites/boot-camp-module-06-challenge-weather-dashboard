@@ -107,17 +107,18 @@ function displayForecast(data) {
   // Display future weather conditions for that city container
   forecastContainerEl.classList.remove("hidden");
 
-  // Display 5-day forecast
+  // Display 5-day forecast with the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
   const forecastArray = data.list;
   for (let i = 0; i < forecastArray.length; i += 8) {
-    // console.log(forecastArray[i]);
+    console.log(forecastArray[i]);
+    const date = dayjs(forecastArray[i].dt_txt).format("M/D/YYYY");
     const forecastCard = document.createElement("div");
     forecastCard.classList = "card";
-    forecastCard.innerHTML = `<h4>Date</h4>
-      <p><span>☀️</span></p>
-      <p>Temp: <span></span></p>
-      <p>Wind: <span></span></p>
-      <p>Humidity: <span></span></p>`;
+    forecastCard.innerHTML = `<h4>${date}</h4>
+      <p><span></span></p>
+      <p>Temp: <span>${forecastArray[i].main.temp} °F</span></p>
+      <p>Wind: <span>${forecastArray[i].wind.speed} MPH</span></p>
+      <p>Humidity: <span>${forecastArray[i].main.humidity} %</span></p>`;
     cardsContainerEl.appendChild(forecastCard);
   }
 }
