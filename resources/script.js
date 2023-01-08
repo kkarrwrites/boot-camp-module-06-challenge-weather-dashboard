@@ -18,6 +18,8 @@ const cardsContainerEl = document.querySelector(".cards");
 function handleSearchFormSubmit(event) {
   event.preventDefault();
 
+  cardsContainerEl.innerHTML = "";
+
   const citySearched = searchInputEl.value.trim();
   const apiKey = "f4340e47ea2c893cd45e033c791f26e0";
 
