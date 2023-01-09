@@ -18,6 +18,7 @@ const cardsContainerEl = document.querySelector(".cards");
 function handleSearchFormSubmit(event) {
   event.preventDefault();
 
+  // Clear previous search result
   cardsContainerEl.innerHTML = "";
 
   const citySearched = searchInputEl.value.trim();
@@ -106,23 +107,33 @@ function displayWeather(data) {
 function displayForecast(data) {
   // When I view future weather conditions for that city, then I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
 
-  // Display future weather conditions for that city container
+  // Display forecast container
   forecastContainerEl.classList.remove("hidden");
 
   // Display 5-day forecast with the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
   const forecastArray = data.list;
   for (let i = 0; i < forecastArray.length; i += 8) {
-    console.log(forecastArray[i]);
-    const date = dayjs(forecastArray[i].dt_txt).format("M/D/YYYY");
     const forecastCard = document.createElement("div");
     forecastCard.classList = "card";
+
+    // Display date variable
+    const date = dayjs(forecastArray[i].dt_txt).format("M/D/YYYY");
+
+    //Display icon variable
+    const icon = forecastArray[i].weather[0].icon;
+
     forecastCard.innerHTML = `<h4>${date}</h4>
-      <p><span></span></p>
+      <p><span><img src="resources/icons/${icon}.png" style="background-color:white;"></span></p>
       <p>Temp: <span>${forecastArray[i].main.temp} °F</span></p>
       <p>Wind: <span>${forecastArray[i].wind.speed} MPH</span></p>
       <p>Humidity: <span>${forecastArray[i].main.humidity} %</span></p>`;
+
     cardsContainerEl.appendChild(forecastCard);
   }
 }
+
+// When I search for a city, then I am presented with current and future conditions for that city and that city is added to the search history
+
+// When I click on a city in the search history, then I am again presented with current and future conditions for that city
 
 searchFormEl.addEventListener("submit", handleSearchFormSubmit);
