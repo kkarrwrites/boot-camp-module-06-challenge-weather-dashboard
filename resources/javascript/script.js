@@ -132,7 +132,7 @@ function displayForecast(data) {
   }
 }
 
-// When I search for a city, then I am presented with current and future conditions for that city and that city is added to the search history
+// When I search for a city, then that city is added to the search history
 
 // When I click on a city in the search history, then I am again presented with current and future conditions for that city
 
