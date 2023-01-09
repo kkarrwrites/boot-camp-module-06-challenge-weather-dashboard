@@ -3,6 +3,8 @@
 const searchFormEl = document.querySelector("#search-form");
 const searchInputEl = document.querySelector("#search-input");
 
+const cityListContainerEl = document.querySelector(".city-list");
+
 const cityContainerEl = document.querySelector(".city");
 const cityNameEl = document.querySelector("#city-name");
 const cityDateEl = document.querySelector("#city-date");
@@ -34,6 +36,7 @@ function handleSearchFormSubmit(event) {
       if (response.ok) {
         response.json().then(function (data) {
           displayWeather(data);
+          displaySearchResults(data);
         });
       }
     });
@@ -133,7 +136,14 @@ function displayForecast(data) {
 }
 
 // When I search for a city, then that city is added to the search history
+function displaySearchResults(data) {
+  const citySearched = data.name;
+  const cityListItem = document.createElement("p");
+  cityListItem.innerHTML = `${citySearched}`;
+  cityListContainerEl.appendChild(cityListItem);
+}
 
 // When I click on a city in the search history, then I am again presented with current and future conditions for that city
 
+// Event listener for form search button
 searchFormEl.addEventListener("submit", handleSearchFormSubmit);
