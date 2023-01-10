@@ -74,8 +74,9 @@ hr {
   margin: 0 0 0.5rem 0;
 }
 
-.city-list p {
+.city-list button {
   background-color: hsl(0, 0%, 61%);
+  border: none;
   color: hsl(0, 0%, 0%);
   font-size: 18px;
   margin: 0 0 0.5rem 0;
@@ -84,7 +85,7 @@ hr {
   width: 100%;
 }
 
-.city-list p:hover {
+.city-list button:hover {
   background-color: hsl(0, 0%, 80%);
 }
 
