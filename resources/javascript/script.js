@@ -17,6 +17,8 @@ const currentHumidity = document.querySelector("#humidity-current");
 const forecastContainerEl = document.querySelector(".forecast");
 const cardsContainerEl = document.querySelector(".cards");
 
+let cities = [];
+
 function handleSearchFormSubmit(event) {
   event.preventDefault();
 
@@ -36,7 +38,6 @@ function handleSearchFormSubmit(event) {
       if (response.ok) {
         response.json().then(function (data) {
           displayWeather(data);
-          displaySearchResults(data);
         });
       }
     });
@@ -54,9 +55,14 @@ function handleSearchFormSubmit(event) {
       }
     });
 
+    cities.push(citySearched);
     searchInputEl.value = "";
+
+    storeCities();
+    renderCities();
   } else {
     window.alert("You must input a city name to get a weather report.");
+    return;
   }
 }
 
@@ -135,15 +141,70 @@ function displayForecast(data) {
   }
 }
 
-// When I search for a city, then that city is added to the search history
-function displaySearchResults(data) {
-  const citySearched = data.name;
-  const cityListItem = document.createElement("p");
-  cityListItem.innerHTML = `${citySearched}`;
-  cityListContainerEl.appendChild(cityListItem);
+function storeCities() {
+  // Stringify and set key in localStorage to cities array
+  localStorage.setItem("Cities Searched", JSON.stringify(cities));
 }
 
-// When I click on a city in the search history, then I am again presented with current and future conditions for that city
+function renderCities() {
+  // Render a new button for each city
+  cityListContainerEl.innerHTML = "";
+  for (let i = 0; i < cities.length; i++) {
+    const city = cities[i];
+    const button = document.createElement("button");
+    button.textContent = city;
+    cityListContainerEl.appendChild(button);
+  }
+}
 
-// Event listener for form search button
+function displayCityData(event) {
+  cardsContainerEl.innerHTML = "";
+
+  const citySearched = event.target.innerHTML;
+  const apiKey = "f4340e47ea2c893cd45e033c791f26e0";
+
+  if (citySearched) {
+    const apiWeatherUrl =
+      "https://api.openweathermap.org/data/2.5/weather?q=" +
+      citySearched +
+      "&units=imperial&appid=" +
+      apiKey;
+    fetch(apiWeatherUrl).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (data) {
+          displayWeather(data);
+        });
+      }
+    });
+
+    const apiForecastUrl =
+      "http://api.openweathermap.org/data/2.5/forecast?q=" +
+      citySearched +
+      "&units=imperial&appid=" +
+      apiKey;
+    fetch(apiForecastUrl).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (data) {
+          displayForecast(data);
+        });
+      }
+    });
+  }
+}
+
+function init() {
+  const storedCities = JSON.parse(localStorage.getItem("Cities Searched"));
+  if (storedCities !== null) {
+    cities = storedCities;
+  }
+  renderCities();
+}
+
+// Event listener to form search button
 searchFormEl.addEventListener("submit", handleSearchFormSubmit);
+
+// Event listener to past searches
+cityListContainerEl.addEventListener("click", displayCityData);
+
+// Renders cities on page load
+init();
