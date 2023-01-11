@@ -152,7 +152,7 @@ function renderCities() {
   for (let i = 0; i < cities.length; i++) {
     const city = cities[i];
     const button = document.createElement("button");
-    button.textContent = city;
+    button.textContent = city.toUpperCase();
     cityListContainerEl.appendChild(button);
   }
 }
