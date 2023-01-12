@@ -17,6 +17,7 @@ If I had more time to work on this application, I would do the following:
 - Address what happens if the call(s) to the API fail.
 - Refactor the displayWeather() function so that the daily weather at the top of the application displays on the page dynamically using appendChild() (as it is done in the displayForecast() function) instead of how it is currently done by updating the text content in the hardcoded HTML elements.
 - Remove the displayWeather() function if/else statement that displays the current weather icons and refactor the code so that the API data is used to display the weather icons like it is done in the displayForecast() function.
+- Refactor any repetitive code into reuseable functions.
 - Add more comments to the JavaScript code for the sake of clarity.
 
 ## Technologies
