@@ -2,7 +2,7 @@
 
 ## About
 
-A server-side API, web storage api, and JavaScript coding challenge for UConn Boot Camp.
+A server-side API, web storage api, and JavaScript coding challenge for Full Stack Coding Boot Camp.
 
 ## Description
 
